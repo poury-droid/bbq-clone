@@ -1,15 +1,21 @@
 <!doctype html>
+<!-- 이 문서가 HTML5 형식으로 작성되었다는 선언입니다. -->
 <html lang="ko">
   <head>
+    <!-- 한글을 포함한 모든 문자를 UTF-8 방식으로 표시합니다. -->
     <meta charset="UTF-8" />
+    <!-- 휴대폰에서도 기기 화면 너비에 맞춰 페이지가 표시되도록 설정합니다. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 브라우저 탭에 표시되는 페이지 제목입니다. -->
     <title>BBQ 치킨 - 세상에서 가장 맛있고 건강한 치킨</title>
     <!-- 웹 폰트 적용 (실제 사이트와 유사한 깔끔한 고딕체) -->
     <link
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
       rel="stylesheet"
     />
+    <!-- 배너와 메뉴 페이지 전환 등에 추가로 필요한 스타일 파일입니다. -->
     <link rel="stylesheet" href="./bbq.css" />
+    <!-- 기존 페이지의 기본 레이아웃과 디자인을 담당하는 내부 CSS입니다. -->
     <style>
       /* 기본 초기화 및 변수 설정 */
       :root {
@@ -385,18 +391,27 @@
     </style>
   </head>
   <body>
-    <!-- 최상단 배너 -->
+    <!-- =====================================================
+         1. 최상단 앱 안내 띠 배너
+         사이트에 들어왔을 때 가장 위에 보이는 짧은 안내 영역입니다.
+         ===================================================== -->
     <div class="top-banner">
       BBQ 앱에서 <span>최대 혜택 쿠폰</span> 받을 수 있어요! &nbsp;&nbsp;
       <a style="text-decoration: underline">앱 이동하기</a>
     </div>
 
-    <!-- 헤더 -->
+    <!-- =====================================================
+         2. 메인 헤더
+         로고, 주요 메뉴, 로그인과 전화주문 버튼을 포함합니다.
+         header는 CSS에서 sticky로 설정되어 스크롤 중에도 상단에 붙습니다.
+         ===================================================== -->
     <header>
       <div class="container header-inner">
+        <!-- BBQ 공식 BI 이미지입니다. 클릭하면 페이지 맨 위로 이동합니다. -->
         <a href="#" class="logo" aria-label="BBQ 홈">
           <img src="./bi_bbq.jpg" alt="BBQ 공식 로고" />
         </a>
+        <!-- 사이트의 주요 페이지로 이동하기 위한 메뉴 목록입니다. -->
         <ul class="main-nav">
           <li>BBQ 주문</li>
           <li>BBQ 몰</li>
@@ -404,6 +419,7 @@
           <li>매장 찾기</li>
           <li>창업 정보</li>
         </ul>
+        <!-- 회원 기능과 전화주문을 모아 놓은 보조 메뉴입니다. -->
         <div class="util-nav">
           <a href="#">로그인</a>
           <a href="#">회원가입</a>
@@ -412,34 +428,53 @@
       </div>
     </header>
 
-    <!-- 메인 이미지 배너 -->
+    <!-- =====================================================
+         3. 메인 이미지 슬라이드 배너
+         banner-slide 하나가 배너 한 장입니다.
+         처음 표시할 배너에만 active 클래스를 지정합니다.
+         실제 전환, 자동 재생, 페이지 점 생성은 bbq.js가 담당합니다.
+         ===================================================== -->
     <section class="main-banner" aria-label="BBQ 메인 프로모션">
+      <!-- 모든 배너를 같은 위치에 겹쳐 놓는 슬라이드 묶음입니다. -->
       <div class="banner-track">
+        <!-- 첫 번째 배너: active 클래스가 있어 페이지 시작 시 보입니다. -->
         <article class="banner-slide active">
           <img src="./banner1.png" alt="BBQ 필크런치 오픈런 이벤트" />
         </article>
+        <!-- 두 번째 배너 -->
         <article class="banner-slide">
           <img src="./banner2.png" alt="BBQ 프로모션 배너 2" />
         </article>
+        <!-- 세 번째 배너 -->
         <article class="banner-slide">
           <img src="./banner3.png" alt="BBQ 프로모션 배너 3" />
         </article>
+        <!-- 네 번째 배너 -->
         <article class="banner-slide">
           <img src="./banner4.png" alt="BBQ 프로모션 배너 4" />
         </article>
       </div>
+      <!-- 좌우 화살표: bbq.js에서 이전/다음 배너 이동 기능을 연결합니다. -->
       <button class="banner-arrow banner-prev" type="button" aria-label="이전 배너">&#10094;</button>
       <button class="banner-arrow banner-next" type="button" aria-label="다음 배너">&#10095;</button>
+      <!-- 현재 배너 번호, 전체 개수, 페이지 점, 자동 재생 버튼 영역입니다. -->
       <div class="banner-control">
         <span class="banner-current">01</span><span class="banner-divider">/</span><span class="banner-total">04</span>
+        <!-- 페이지 점은 배너 개수에 맞춰 bbq.js가 자동 생성합니다. -->
         <div class="banner-dots" aria-label="배너 선택"></div>
+        <!-- Ⅱ 버튼을 누르면 자동 재생이 멈추고 ▶ 모양으로 바뀝니다. -->
         <button class="banner-pause" type="button" aria-label="자동 재생 일시정지">Ⅱ</button>
       </div>
     </section>
 
-    <!-- 배달/포장 검색 -->
+    <!-- =====================================================
+         4. 배달/포장 주문 검색
+         탭을 누르면 아래 입력창의 안내 문구가 배달 또는 포장용으로 바뀝니다.
+         switchTab 함수는 문서 아래쪽 내부 script에 작성되어 있습니다.
+         ===================================================== -->
     <section class="hero-section">
       <div class="container order-box">
+        <!-- 기본 선택은 active 클래스가 있는 배달 탭입니다. -->
         <div class="tab-wrap">
           <button class="tab-btn active" onclick="switchTab(this)">
             배달 DELIVERY
@@ -448,6 +483,7 @@
             포장 PACKAGING
           </button>
         </div>
+        <!-- 실제 주소 검색 UI처럼 보이는 입력 영역입니다. -->
         <div class="search-bar">
           <input type="text" placeholder="배달 받으실 주소를 입력해주세요" />
           <span class="icon">🔍</span>
@@ -455,7 +491,10 @@
       </div>
     </section>
 
-    <!-- 메뉴 카테고리 -->
+    <!-- =====================================================
+         5. 메뉴 카테고리 바로가기
+         각 category-item은 아이콘과 카테고리 이름으로 구성됩니다.
+         ===================================================== -->
     <section class="category-section">
       <div class="container category-list">
         <a class="category-item">
@@ -493,17 +532,24 @@
       </div>
     </section>
 
-    <!-- 신메뉴 섹션 -->
+    <!-- =====================================================
+         6. 신메뉴 소개
+         메뉴 카드는 총 4개이며 한 페이지에는 2개만 표시합니다.
+         좌우 화살표를 누르면 bbq.js가 is-hidden 클래스를 변경해
+         1페이지와 2페이지의 카드가 번갈아 나타납니다.
+         ===================================================== -->
     <section class="menu-section">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">새로 나왔어요!</h2>
+          <!-- 현재 페이지 표시와 신메뉴 전용 좌우 이동 버튼입니다. -->
           <div class="page-indicator new-menu-pagination">
             <span class="new-menu-page">1 / 2</span>
             <button class="new-menu-arrow new-menu-prev" type="button" aria-label="이전 신메뉴">&#10094;</button>
             <button class="new-menu-arrow new-menu-next" type="button" aria-label="다음 신메뉴">&#10095;</button>
           </div>
         </div>
+        <!-- new-menu-card 클래스가 붙은 카드만 JS 페이지 전환 대상이 됩니다. -->
         <div class="menu-grid new-menu-grid">
           <div class="menu-card new-menu-card">
             <div
@@ -553,7 +599,12 @@
       </div>
     </section>
 
-    <!-- 추천메뉴 섹션 -->
+    <!-- =====================================================
+         7. 추천메뉴 소개
+         신메뉴와 마찬가지로 총 4개의 카드를 2개씩 보여줍니다.
+         recommend-menu-card와 recommend 관련 클래스는 신메뉴 기능과
+         서로 영향을 주지 않도록 별도로 사용합니다.
+         ===================================================== -->
     <section
       class="menu-section"
       style="background-color: #fff; padding-top: 0"
@@ -561,12 +612,14 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">이런 메뉴는 어때요?</h2>
+          <!-- 현재 추천메뉴 페이지와 이전/다음 버튼입니다. -->
           <div class="page-indicator recommend-pagination">
             <span class="recommend-page">1 / 2</span>
             <button class="new-menu-arrow recommend-prev" type="button" aria-label="이전 추천메뉴">&#10094;</button>
             <button class="new-menu-arrow recommend-next" type="button" aria-label="다음 추천메뉴">&#10095;</button>
           </div>
         </div>
+        <!-- recommend-menu-card 클래스가 붙은 카드만 추천메뉴 전환 대상입니다. -->
         <div class="menu-grid recommend-menu-grid">
           <div class="menu-card recommend-menu-card">
             <div
@@ -612,7 +665,12 @@
       </div>
     </section>
 
-    <!-- BBQ 서비스 섹션 -->
+    <!-- =====================================================
+         8. BBQ 서비스 바로가기
+         쿠폰북과 창업문의 이미지를 카드 형태로 보여줍니다.
+         card-bg는 배경 이미지, card-overlay는 글자를 읽기 쉽게 하는
+         반투명 어두운 막, card-content는 제목과 설명을 담당합니다.
+         ===================================================== -->
     <section class="menu-section">
       <div class="container">
         <h2 class="section-title" style="margin-bottom: 24px">BBQ 서비스</h2>
@@ -645,7 +703,10 @@
       </div>
     </section>
 
-    <!-- 푸터 -->
+    <!-- =====================================================
+         9. 푸터
+         약관 링크와 회사명, 주문번호, 사업자 정보를 표시합니다.
+         ===================================================== -->
     <footer>
       <div class="container">
         <div class="footer-nav">
@@ -670,24 +731,36 @@
       </div>
     </footer>
 
-    <!-- 자바스크립트 -->
+    <!-- =====================================================
+         10. 자바스크립트 연결
+         아래 내부 script는 배달/포장 탭의 문구를 변경합니다.
+         그 다음 불러오는 bbq.js는 배너와 메뉴 페이지 전환을 담당합니다.
+         body 마지막에서 실행하면 화면 요소가 만들어진 뒤 코드를 읽게 되어
+         요소를 찾지 못하는 오류를 줄일 수 있습니다.
+         ===================================================== -->
     <script>
-      // 배달/포장 탭 클릭 동작
+      // 사용자가 누른 배달/포장 버튼을 전달받는 함수입니다.
       function switchTab(clickedBtn) {
+        // 모든 탭의 선택 표시를 먼저 제거합니다.
         document
           .querySelectorAll(".tab-btn")
           .forEach((btn) => btn.classList.remove("active"));
+
+        // 실제로 누른 탭에만 active 클래스를 다시 붙입니다.
         clickedBtn.classList.add("active");
 
-        // 입력창 텍스트 변경
+        // 선택한 탭에 맞게 주소 입력창의 안내 문구를 변경합니다.
         const searchInput = document.querySelector(".search-bar input");
         if (clickedBtn.innerText.includes("포장")) {
+          // 버튼 글자에 '포장'이 포함되어 있으면 매장 검색 문구를 표시합니다.
           searchInput.placeholder = "포장하실 매장명이나 주소를 입력해주세요";
         } else {
+          // 그렇지 않으면 배달 주소 입력 문구를 표시합니다.
           searchInput.placeholder = "배달 받으실 주소를 입력해주세요";
         }
       }
     </script>
+    <!-- 메인 배너, 신메뉴, 추천메뉴 전환 기능이 들어 있는 외부 JS입니다. -->
     <script src="./bbq.js"></script>
   </body>
 </html>

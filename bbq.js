@@ -138,9 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
      3. 추천메뉴 페이지 전환
      ========================================================= */
 
-  const recommendCards = [
-    ...document.querySelectorAll(".recommend-menu-card"),
-  ];
+  const recommendCards = [...document.querySelectorAll(".recommend-menu-card")];
   const recommendPageText = document.querySelector(".recommend-page");
   let recommendPage = 0;
   const recommendPageCount = Math.ceil(recommendCards.length / cardsPerPage);
@@ -157,8 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 화면의 1 / 2 또는 2 / 2 문구를 갱신합니다.
-    recommendPageText.textContent =
-      `${recommendPage + 1} / ${recommendPageCount}`;
+    recommendPageText.textContent = `${recommendPage + 1} / ${recommendPageCount}`;
   }
 
   // 추천메뉴 영역의 좌우 화살표에 페이지 이동 기능을 연결합니다.

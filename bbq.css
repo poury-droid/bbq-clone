@@ -1,29 +1,58 @@
+/* =========================================================
+   1. 메인 이미지 배너의 전체 영역
+   ========================================================= */
+
 .main-banner {
+  /* 안쪽의 배너, 화살표, 컨트롤을 이 요소 기준으로 배치합니다. */
   position: relative;
+
+  /* PC 화면에서 사용할 배너 높이입니다. */
   height: 460px;
+
+  /* 전환 전후의 배너가 영역 밖으로 튀어나오지 않게 숨깁니다. */
   overflow: hidden;
+
+  /* 이미지가 늦게 로딩될 때 대신 보이는 기본 배경색입니다. */
   background: #f4f1ec;
 }
 
+/* 배너 묶음과 배너 한 장을 부모 영역 크기에 맞춥니다. */
 .banner-track,
 .banner-slide {
   width: 100%;
   height: 100%;
 }
 
+/* =========================================================
+   2. 배너 한 장의 기본 상태와 선택 상태
+   ========================================================= */
+
 .banner-slide {
+  /* 모든 배너를 같은 위치에 겹쳐 놓습니다. */
   position: absolute;
   inset: 0;
+
+  /* 배너 안의 이미지를 가운데에 배치합니다. */
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+
+  /* 선택되지 않은 배너는 투명하게 만들고 클릭 대상에서도 제외합니다. */
   opacity: 0;
   visibility: hidden;
+
+  /* 오른쪽에서 왼쪽으로 살짝 이동하며 나타나는 효과의 시작 위치입니다. */
   transform: translateX(35px);
-  transition: opacity 0.55s ease, transform 0.55s ease, visibility 0.55s;
+
+  /* 투명도와 위치가 0.55초 동안 부드럽게 변합니다. */
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease,
+    visibility 0.55s;
 }
 
+/* JavaScript가 현재 배너에 active 클래스를 붙이면 화면에 표시됩니다. */
 .banner-slide.active {
   opacity: 1;
   visibility: visible;
@@ -34,17 +63,30 @@
 .banner-slide > img {
   width: 100%;
   height: 100%;
+
+  /* 이미지 비율을 유지하면서 배너 영역을 빈 공간 없이 채웁니다. */
   object-fit: cover;
+
+  /* 이미지 가운데를 기준으로 남는 부분을 잘라냅니다. */
   object-position: center;
 }
 
+/* =========================================================
+   3. 배너 좌우 이동 화살표
+   ========================================================= */
+
 .banner-arrow {
+  /* 화살표를 배너 위에 띄우고 세로 중앙에 배치합니다. */
   position: absolute;
   z-index: 5;
   top: 50%;
+
   width: 48px;
   height: 48px;
+
+  /* 버튼 높이의 절반만큼 위로 올려 정확한 중앙을 맞춥니다. */
   margin-top: -24px;
+
   border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.17);
@@ -53,16 +95,33 @@
   transition: 0.2s;
 }
 
-.banner-arrow:hover { background: #e41e26; border-color: #e41e26; }
-.banner-prev { left: 32px; }
-.banner-next { right: 32px; }
+/* 마우스를 올리면 BBQ의 빨간색으로 강조합니다. */
+.banner-arrow:hover {
+  background: #e41e26;
+  border-color: #e41e26;
+}
+
+/* 이전 버튼과 다음 버튼을 각각 배너의 왼쪽과 오른쪽에 배치합니다. */
+.banner-prev {
+  left: 32px;
+}
+
+.banner-next {
+  right: 32px;
+}
+
+/* =========================================================
+   4. 배너 하단 페이지 및 자동 재생 컨트롤
+   ========================================================= */
 
 .banner-control {
+  /* 배너 하단 중앙에 둥근 컨트롤 박스를 띄웁니다. */
   position: absolute;
   z-index: 5;
   left: 50%;
   bottom: 20px;
   transform: translateX(-50%);
+
   display: flex;
   align-items: center;
   gap: 8px;
@@ -73,20 +132,82 @@
   font-size: 11px;
 }
 
-.banner-current { font-weight: 800; }
-.banner-divider, .banner-total { opacity: 0.55; }
-.banner-dots { display: flex; gap: 6px; margin: 0 5px; }
-.banner-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.45); }
-.banner-dot.active { width: 19px; border-radius: 5px; background: #e41e26; }
-.banner-pause { color: #fff; font-size: 10px; width: 18px; }
+/* 현재 페이지 번호를 다른 숫자보다 진하게 표시합니다. */
+.banner-current {
+  font-weight: 800;
+}
+
+/* 구분 기호와 전체 페이지 번호는 조금 흐리게 표시합니다. */
+.banner-divider,
+.banner-total {
+  opacity: 0.55;
+}
+
+/* JavaScript가 생성한 페이지 점들을 가로로 정렬합니다. */
+.banner-dots {
+  display: flex;
+  gap: 6px;
+  margin: 0 5px;
+}
+
+/* 선택되지 않은 배너의 작은 원형 페이지 점입니다. */
+.banner-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* 현재 배너의 점은 빨간색의 긴 막대 모양으로 표시합니다. */
+.banner-dot.active {
+  width: 19px;
+  border-radius: 5px;
+  background: #e41e26;
+}
+
+/* 자동 재생 일시정지 및 재생 버튼입니다. */
+.banner-pause {
+  width: 18px;
+  color: #fff;
+  font-size: 10px;
+}
+
+/* =========================================================
+   5. 모바일 화면의 배너 반응형 설정
+   화면 너비가 768px 이하일 때만 아래 규칙이 적용됩니다.
+   ========================================================= */
 
 @media (max-width: 768px) {
-  .main-banner { height: 340px; }
-  .banner-slide > img { object-fit: cover; }
-  .banner-arrow { width: 38px; height: 38px; font-size: 15px; }
-  .banner-prev { left: 10px; }
-  .banner-next { right: 10px; }
+  /* 작은 화면에서는 배너 높이를 줄입니다. */
+  .main-banner {
+    height: 340px;
+  }
+
+  .banner-slide > img {
+    object-fit: cover;
+  }
+
+  /* 모바일에서 화살표가 너무 크지 않도록 크기를 줄입니다. */
+  .banner-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  /* 화면 가장자리와 화살표 사이의 간격도 줄입니다. */
+  .banner-prev {
+    left: 10px;
+  }
+
+  .banner-next {
+    right: 10px;
+  }
 }
+
+/* =========================================================
+   6. 신메뉴와 추천메뉴 페이지 이동 컨트롤
+   두 영역에 같은 모양을 적용하기 위해 선택자를 함께 작성했습니다.
+   ========================================================= */
 
 .new-menu-pagination,
 .recommend-pagination {
@@ -95,10 +216,13 @@
   gap: 5px;
 }
 
-.new-menu-page {
+/* 현재 페이지 숫자와 화살표 사이에 여백을 줍니다. */
+.new-menu-page,
+.recommend-page {
   margin-right: 8px;
 }
 
+/* 신메뉴와 추천메뉴에서 함께 사용하는 원형 화살표 버튼입니다. */
 .new-menu-arrow {
   width: 34px;
   height: 34px;
@@ -109,44 +233,68 @@
   transition: 0.2s;
 }
 
+/* 화살표에 마우스를 올리면 BBQ 빨간색으로 바뀝니다. */
 .new-menu-arrow:hover {
   color: #fff;
   border-color: #e41e26;
   background: #e41e26;
 }
 
+/* 페이지가 바뀔 때 나타나는 카드에 짧은 등장 애니메이션을 적용합니다. */
 .new-menu-card,
 .recommend-menu-card {
   animation: newMenuFade 0.35s ease;
 }
 
+/* JavaScript가 현재 페이지에 포함되지 않은 카드에 이 클래스를 붙입니다. */
 .new-menu-card.is-hidden,
 .recommend-menu-card.is-hidden {
   display: none;
 }
 
+/* 카드는 오른쪽에서 조금 이동하면서 서서히 나타납니다. */
 @keyframes newMenuFade {
-  from { opacity: 0; transform: translateX(16px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* BBQ 공식 BI 원본의 비율과 색상을 유지하고 여백만 감춥니다. */
+/* =========================================================
+   7. 헤더의 BBQ 공식 로고
+   원본 BI의 비율과 색상은 바꾸지 않고 이미지 주변의 흰 여백만
+   부모 요소의 overflow: hidden을 이용해 화면에서 감춥니다.
+   ========================================================= */
+
 .header-inner .logo {
+  /* 안쪽 로고 이미지의 absolute 위치 기준이 됩니다. */
   position: relative;
   display: block;
+
+  /* flex 레이아웃 안에서 로고 영역을 항상 96px로 유지합니다. */
   flex: 0 0 96px;
   width: 96px;
   height: 46px;
+
+  /* 원본 이미지의 넓은 흰색 여백이 로고 영역 밖에서 보이지 않게 합니다. */
   overflow: hidden;
   letter-spacing: 0;
 }
 
 .header-inner .logo img {
+  /* 큰 원본 이미지에서 실제 로고 부분만 부모 영역 안으로 이동시킵니다. */
   position: absolute;
   width: 190px;
   max-width: none;
   height: 95px;
   left: -49px;
   top: -25px;
+
+  /* 지정한 너비와 높이에 맞춰 원본 이미지를 표시합니다. */
   object-fit: fill;
 }
