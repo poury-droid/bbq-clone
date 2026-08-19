@@ -1,0 +1,152 @@
+.main-banner {
+  position: relative;
+  height: 460px;
+  overflow: hidden;
+  background: #f4f1ec;
+}
+
+.banner-track,
+.banner-slide {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(35px);
+  transition: opacity 0.55s ease, transform 0.55s ease, visibility 0.55s;
+}
+
+.banner-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  z-index: 1;
+}
+
+.banner-slide > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.banner-arrow {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  margin-top: -24px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.17);
+  color: #fff;
+  font-size: 20px;
+  transition: 0.2s;
+}
+
+.banner-arrow:hover { background: #e41e26; border-color: #e41e26; }
+.banner-prev { left: 32px; }
+.banner-next { right: 32px; }
+
+.banner-control {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.48);
+  color: #fff;
+  font-size: 11px;
+}
+
+.banner-current { font-weight: 800; }
+.banner-divider, .banner-total { opacity: 0.55; }
+.banner-dots { display: flex; gap: 6px; margin: 0 5px; }
+.banner-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.45); }
+.banner-dot.active { width: 19px; border-radius: 5px; background: #e41e26; }
+.banner-pause { color: #fff; font-size: 10px; width: 18px; }
+
+@media (max-width: 768px) {
+  .main-banner { height: 340px; }
+  .banner-slide > img { object-fit: cover; }
+  .banner-arrow { width: 38px; height: 38px; font-size: 15px; }
+  .banner-prev { left: 10px; }
+  .banner-next { right: 10px; }
+}
+
+.new-menu-pagination,
+.recommend-pagination {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.new-menu-page {
+  margin-right: 8px;
+}
+
+.new-menu-arrow {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  color: #555;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.new-menu-arrow:hover {
+  color: #fff;
+  border-color: #e41e26;
+  background: #e41e26;
+}
+
+.new-menu-card,
+.recommend-menu-card {
+  animation: newMenuFade 0.35s ease;
+}
+
+.new-menu-card.is-hidden,
+.recommend-menu-card.is-hidden {
+  display: none;
+}
+
+@keyframes newMenuFade {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* BBQ 공식 BI 원본의 비율과 색상을 유지하고 여백만 감춥니다. */
+.header-inner .logo {
+  position: relative;
+  display: block;
+  flex: 0 0 96px;
+  width: 96px;
+  height: 46px;
+  overflow: hidden;
+  letter-spacing: 0;
+}
+
+.header-inner .logo img {
+  position: absolute;
+  width: 190px;
+  max-width: none;
+  height: 95px;
+  left: -49px;
+  top: -25px;
+  object-fit: fill;
+}

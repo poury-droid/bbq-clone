@@ -9,6 +9,7 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./bbq.css" />
     <style>
       /* 기본 초기화 및 변수 설정 */
       :root {
@@ -393,7 +394,9 @@
     <!-- 헤더 -->
     <header>
       <div class="container header-inner">
-        <a href="#" class="logo">BBQ</a>
+        <a href="#" class="logo" aria-label="BBQ 홈">
+          <img src="./bi_bbq.jpg" alt="BBQ 공식 로고" />
+        </a>
         <ul class="main-nav">
           <li>BBQ 주문</li>
           <li>BBQ 몰</li>
@@ -408,6 +411,31 @@
         </div>
       </div>
     </header>
+
+    <!-- 메인 이미지 배너 -->
+    <section class="main-banner" aria-label="BBQ 메인 프로모션">
+      <div class="banner-track">
+        <article class="banner-slide active">
+          <img src="./banner1.png" alt="BBQ 필크런치 오픈런 이벤트" />
+        </article>
+        <article class="banner-slide">
+          <img src="./banner2.png" alt="BBQ 프로모션 배너 2" />
+        </article>
+        <article class="banner-slide">
+          <img src="./banner3.png" alt="BBQ 프로모션 배너 3" />
+        </article>
+        <article class="banner-slide">
+          <img src="./banner4.png" alt="BBQ 프로모션 배너 4" />
+        </article>
+      </div>
+      <button class="banner-arrow banner-prev" type="button" aria-label="이전 배너">&#10094;</button>
+      <button class="banner-arrow banner-next" type="button" aria-label="다음 배너">&#10095;</button>
+      <div class="banner-control">
+        <span class="banner-current">01</span><span class="banner-divider">/</span><span class="banner-total">04</span>
+        <div class="banner-dots" aria-label="배너 선택"></div>
+        <button class="banner-pause" type="button" aria-label="자동 재생 일시정지">Ⅱ</button>
+      </div>
+    </section>
 
     <!-- 배달/포장 검색 -->
     <section class="hero-section">
@@ -470,10 +498,14 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">새로 나왔어요!</h2>
-          <span class="page-indicator">1 / 2 &nbsp; &#10094; &#10095;</span>
+          <div class="page-indicator new-menu-pagination">
+            <span class="new-menu-page">1 / 2</span>
+            <button class="new-menu-arrow new-menu-prev" type="button" aria-label="이전 신메뉴">&#10094;</button>
+            <button class="new-menu-arrow new-menu-next" type="button" aria-label="다음 신메뉴">&#10095;</button>
+          </div>
         </div>
-        <div class="menu-grid">
-          <div class="menu-card">
+        <div class="menu-grid new-menu-grid">
+          <div class="menu-card new-menu-card">
             <div
               class="menu-img"
               style="background-image: url(&quot;./new 필크런치.png&quot;)"
@@ -484,7 +516,7 @@
               <div class="menu-price">27,000원</div>
             </div>
           </div>
-          <div class="menu-card">
+          <div class="menu-card new-menu-card">
             <div
               class="menu-img"
               style="background-image: url(&quot;./필크런치 더블.png&quot;)"
@@ -493,6 +525,28 @@
               <span class="menu-badge">NEW</span>
               <div class="menu-name">[NEW] 필크런치 더블 PICK 세트</div>
               <div class="menu-price">46,000원</div>
+            </div>
+          </div>
+          <div class="menu-card new-menu-card">
+            <div
+              class="menu-img"
+              style="background-image: url(&quot;./new menu1.png&quot;)"
+            ></div>
+            <div class="menu-info">
+              <span class="menu-badge">NEW</span>
+              <div class="menu-name">[NEW] 필크런치 트리플 PICK 세트</div>
+              <div class="menu-price">52,000원</div>
+            </div>
+          </div>
+          <div class="menu-card new-menu-card">
+            <div
+              class="menu-img"
+              style="background-image: url(&quot;./new menu2.png&quot;)"
+            ></div>
+            <div class="menu-info">
+              <span class="menu-badge">NEW</span>
+              <div class="menu-name">[NEW] 필크런치 소스 세트</div>
+              <div class="menu-price">29,000원</div>
             </div>
           </div>
         </div>
@@ -507,10 +561,14 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">이런 메뉴는 어때요?</h2>
-          <span class="page-indicator">1 / 2 &nbsp; &#10094; &#10095;</span>
+          <div class="page-indicator recommend-pagination">
+            <span class="recommend-page">1 / 2</span>
+            <button class="new-menu-arrow recommend-prev" type="button" aria-label="이전 추천메뉴">&#10094;</button>
+            <button class="new-menu-arrow recommend-next" type="button" aria-label="다음 추천메뉴">&#10095;</button>
+          </div>
         </div>
-        <div class="menu-grid">
-          <div class="menu-card">
+        <div class="menu-grid recommend-menu-grid">
+          <div class="menu-card recommend-menu-card">
             <div
               class="menu-img"
               style="background-image: url(&quot;./황올.jpg&quot;)"
@@ -520,13 +578,33 @@
               <div class="menu-price">23,000원</div>
             </div>
           </div>
-          <div class="menu-card">
+          <div class="menu-card recommend-menu-card">
             <div
               class="menu-img"
               style="background-image: url(&quot;./반반.jpg&quot;)"
             ></div>
             <div class="menu-info">
               <div class="menu-name">[황.양.반] 황올 반+양념 반</div>
+              <div class="menu-price">24,000원</div>
+            </div>
+          </div>
+          <div class="menu-card recommend-menu-card">
+            <div
+              class="menu-img"
+              style="background-image: url(&quot;./menu3.png&quot;)"
+            ></div>
+            <div class="menu-info">
+              <div class="menu-name">자메이카 통다리구이</div>
+              <div class="menu-price">24,000원</div>
+            </div>
+          </div>
+          <div class="menu-card recommend-menu-card">
+            <div
+              class="menu-img"
+              style="background-image: url(&quot;./menu4.png&quot;)"
+            ></div>
+            <div class="menu-info">
+              <div class="menu-name">자메이카 소떡만나치킨</div>
               <div class="menu-price">24,000원</div>
             </div>
           </div>
@@ -610,5 +688,6 @@
         }
       }
     </script>
+    <script src="./bbq.js"></script>
   </body>
 </html>
