@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BBQ 치킨 - 세상에서 가장 맛있고 건강한 치킨</title>
+    <!-- 웹 폰트 적용 (실제 사이트와 유사한 깔끔한 고딕체) -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* 기본 초기화 및 변수 설정 */
+      :root {
+        --primary-red: #e41e26;
+        --text-dark: #111;
+        --text-gray: #777;
+        --bg-color: #f8f9fa;
+        --border-color: #eaeaea;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Pretendard", sans-serif;
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+      ul {
+        list-style: none;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+      }
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+
+      /* 공통 레이아웃 */
+      .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* 1. 최상단 앱 유도 배너 */
+      .top-banner {
+        background-color: #111;
+        color: #fff;
+        text-align: center;
+        padding: 12px 0;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .top-banner span {
+        color: #ffd700;
+        font-weight: bold;
+      }
+
+      /* 2. 메인 헤더 */
+      header {
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+      }
+      .logo {
+        font-size: 36px;
+        font-weight: 900;
+        color: var(--primary-red);
+        letter-spacing: -2px;
+      }
+
+      .main-nav {
+        display: flex;
+        gap: 40px;
+        font-size: 17px;
+        font-weight: 700;
+      }
+      .main-nav li:hover {
+        color: var(--primary-red);
+      }
+
+      .util-nav {
+        display: flex;
+        gap: 20px;
+        font-size: 14px;
+        color: #555;
+        align-items: center;
+      }
+      .util-nav .order-btn {
+        background-color: var(--primary-red);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 15px;
+      }
+
+      /* 3. 배달/포장 주문 및 주소 검색 (히어로 섹션) */
+      .hero-section {
+        background-color: #fff;
+        padding: 40px 0 30px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .order-box {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .tab-wrap {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 24px;
+      }
+      .tab-btn {
+        flex: 1;
+        padding: 16px;
+        font-size: 20px;
+        font-weight: 800;
+        color: #ccc;
+        border-bottom: 3px solid #eee;
+        transition: 0.3s;
+      }
+      .tab-btn.active {
+        color: var(--text-dark);
+        border-bottom-color: var(--text-dark);
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        background: #f4f4f4;
+        border-radius: 12px;
+        padding: 16px 24px;
+      }
+      .search-bar input {
+        flex: 1;
+        border: none;
+        background: none;
+        font-size: 18px;
+        outline: none;
+      }
+      .search-bar input::placeholder {
+        color: #999;
+      }
+      .search-bar .icon {
+        font-size: 20px;
+        color: var(--primary-red);
+      }
+
+      /* 4. 메뉴 카테고리 (가로 스크롤 형태) */
+      .category-section {
+        background-color: #fff;
+        padding: 30px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .category-list {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      .category-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .category-icon {
+        width: 70px;
+        height: 70px;
+        background-color: #f8f9fa;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        transition: 0.3s;
+        border: 1px solid #eee;
+      }
+      .category-item:hover .category-icon {
+        border-color: var(--primary-red);
+        background-color: #fff0f0;
+        transform: translateY(-5px);
+      }
+      .category-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      /* 5. 메뉴 섹션 공통 스타일 */
+      .menu-section {
+        padding: 60px 0;
+      }
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 24px;
+      }
+      .section-title {
+        font-size: 26px;
+        font-weight: 800;
+      }
+      .page-indicator {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-gray);
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .menu-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        cursor: pointer;
+        transition: 0.3s;
+        border: 1px solid transparent;
+      }
+      .menu-card:hover {
+        border-color: var(--primary-red);
+        box-shadow: 0 8px 24px rgba(228, 30, 38, 0.1);
+      }
+      .menu-img {
+        width: 140px;
+        height: 140px;
+        border-radius: 12px;
+        background-color: #eee;
+        background-size: cover;
+        background-position: center;
+      }
+      .menu-info {
+        flex: 1;
+      }
+      .menu-badge {
+        display: inline-block;
+        background: var(--primary-red);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+      .menu-name {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        word-break: keep-all;
+      }
+      .menu-price {
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      /* 6. BBQ 서비스 (호버 효과) */
+      .service-container {
+        display: flex;
+        gap: 20px;
+      }
+      .service-card {
+        position: relative;
+        flex: 1;
+        height: 260px;
+        border-radius: 16px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .card-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.4s ease;
+        z-index: 1;
+      }
+      .card-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.1) 40%,
+          rgba(0, 0, 0, 0.7)
+        );
+        transition: 0.4s ease;
+        z-index: 2;
+      }
+      .card-content {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        z-index: 3;
+        color: #fff;
+        transition: transform 0.4s ease;
+      }
+      .card-title {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+      .card-desc {
+        font-size: 16px;
+        font-weight: 400;
+        opacity: 0.9;
+      }
+
+      .service-card:hover .card-bg {
+        transform: scale(1.08);
+      }
+      .service-card:hover .card-overlay {
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.2) 40%,
+          rgba(0, 0, 0, 0.9)
+        );
+      }
+      .service-card:hover .card-content {
+        transform: translateY(-5px);
+      }
+
+      /* 7. 푸터 */
+      footer {
+        background-color: #222;
+        color: #888;
+        padding: 50px 0;
+        font-size: 14px;
+      }
+      .footer-nav {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 20px;
+      }
+      .footer-nav a {
+        font-weight: 600;
+        color: #bbb;
+      }
+      .footer-nav a.highlight {
+        color: #fff;
+        font-weight: 700;
+      }
+      .footer-info {
+        line-height: 1.8;
+      }
+      .footer-info strong {
+        display: block;
+        font-size: 18px;
+        color: #ddd;
+        margin-bottom: 10px;
+      }
+      .footer-info span {
+        display: inline-block;
+        margin-right: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 최상단 배너 -->
+    <div class="top-banner">
+      BBQ 앱에서 <span>최대 혜택 쿠폰</span> 받을 수 있어요! &nbsp;&nbsp;
+      <a style="text-decoration: underline">앱 이동하기</a>
+    </div>
+
+    <!-- 헤더 -->
+    <header>
+      <div class="container header-inner">
+        <a href="#" class="logo">BBQ</a>
+        <ul class="main-nav">
+          <li>BBQ 주문</li>
+          <li>BBQ 몰</li>
+          <li>메뉴</li>
+          <li>매장 찾기</li>
+          <li>창업 정보</li>
+        </ul>
+        <div class="util-nav">
+          <a href="#">로그인</a>
+          <a href="#">회원가입</a>
+          <a href="#" class="order-btn">전화주문 1588-9282</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 배달/포장 검색 -->
+    <section class="hero-section">
+      <div class="container order-box">
+        <div class="tab-wrap">
+          <button class="tab-btn active" onclick="switchTab(this)">
+            배달 DELIVERY
+          </button>
+          <button class="tab-btn" onclick="switchTab(this)">
+            포장 PACKAGING
+          </button>
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="배달 받으실 주소를 입력해주세요" />
+          <span class="icon">🔍</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 메뉴 카테고리 -->
+    <section class="category-section">
+      <div class="container category-list">
+        <a class="category-item">
+          <div class="category-icon">🍗</div>
+          <div class="category-name">필릭스 PICK</div>
+        </a>
+        <a class="category-item">
+          <div class="category-icon">👍</div>
+          <div class="category-name">추천</div>
+        </a>
+        <a class="category-item">
+          <div class="category-icon">🍱</div>
+          <div class="category-name">세트</div>
+        </a>
+        <a class="category-item">
+          <div class="category-icon">🔥</div>
+          <div class="category-name">치킨</div>
+        </a>
+        <a class="category-item">
+          <div class="category-icon">🍔</div>
+          <div class="category-name">피자&버거</div>
+        </a>
+        <a class="category-item">
+          <div class="category-icon">🍟</div>
+          <div class="category-name">사이드</div>
+        </a>
+        <a class="category-item">
+          <div class="category-icon">🧂</div>
+          <div class="category-name">소스&무</div>
+        </a>
+        <a class="category-item">
+          <div class="category-icon">🥤</div>
+          <div class="category-name">음료</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 신메뉴 섹션 -->
+    <section class="menu-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">새로 나왔어요!</h2>
+          <span class="page-indicator">1 / 2 &nbsp; &#10094; &#10095;</span>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div
+              class="menu-img"
+              style="background-image: url(&quot;./new 필크런치.png&quot;)"
+            ></div>
+            <div class="menu-info">
+              <span class="menu-badge">NEW</span>
+              <div class="menu-name">[NEW] 필크런치</div>
+              <div class="menu-price">27,000원</div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div
+              class="menu-img"
+              style="background-image: url(&quot;./필크런치 더블.png&quot;)"
+            ></div>
+            <div class="menu-info">
+              <span class="menu-badge">NEW</span>
+              <div class="menu-name">[NEW] 필크런치 더블 PICK 세트</div>
+              <div class="menu-price">46,000원</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 추천메뉴 섹션 -->
+    <section
+      class="menu-section"
+      style="background-color: #fff; padding-top: 0"
+    >
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">이런 메뉴는 어때요?</h2>
+          <span class="page-indicator">1 / 2 &nbsp; &#10094; &#10095;</span>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div
+              class="menu-img"
+              style="background-image: url(&quot;./황올.jpg&quot;)"
+            ></div>
+            <div class="menu-info">
+              <div class="menu-name">황금올리브치킨™</div>
+              <div class="menu-price">23,000원</div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div
+              class="menu-img"
+              style="background-image: url(&quot;./반반.jpg&quot;)"
+            ></div>
+            <div class="menu-info">
+              <div class="menu-name">[황.양.반] 황올 반+양념 반</div>
+              <div class="menu-price">24,000원</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BBQ 서비스 섹션 -->
+    <section class="menu-section">
+      <div class="container">
+        <h2 class="section-title" style="margin-bottom: 24px">BBQ 서비스</h2>
+        <div class="service-container">
+          <div class="service-card">
+            <div
+              class="card-bg"
+              style="background-image: url(&quot;./쿠폰.jpg&quot;)"
+            ></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <div class="card-title">BBQ 쿠폰북 ➔</div>
+              <div class="card-desc">비비큐 쿠폰을 한 곳에 모았어요!</div>
+            </div>
+          </div>
+          <div class="service-card">
+            <div
+              class="card-bg"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80&quot;);
+              "
+            ></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <div class="card-title">창업문의 ➔</div>
+              <div class="card-desc">BBQ로 성공 창업을 도전하세요!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+      <div class="container">
+        <div class="footer-nav">
+          <a href="#">이용약관</a>
+          <a href="#" class="highlight">개인정보처리방침</a>
+          <a href="#">개인위치정보처리방침</a>
+          <a href="#">고객센터</a>
+        </div>
+        <div class="footer-info">
+          <strong>주식회사 제너시스비비큐</strong>
+          <span>주문번호 : 1588-9282</span>
+          <span>고객센터 : 1588-9282</span>
+          <span>창업문의 : 080-383-9000</span><br />
+          <span>대표자 : 윤홍근</span>
+          <span>서울시 송파구 중대로 64(문정동)</span><br />
+          <span>통신판매업신고 : 2017-서울송파-0087</span>
+          <span>사업자등록번호 : 207-81-43555</span>
+          <p style="margin-top: 15px; color: #666">
+            © 2026 GENESIS BBQ. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 자바스크립트 -->
+    <script>
+      // 배달/포장 탭 클릭 동작
+      function switchTab(clickedBtn) {
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        clickedBtn.classList.add("active");
+
+        // 입력창 텍스트 변경
+        const searchInput = document.querySelector(".search-bar input");
+        if (clickedBtn.innerText.includes("포장")) {
+          searchInput.placeholder = "포장하실 매장명이나 주소를 입력해주세요";
+        } else {
+          searchInput.placeholder = "배달 받으실 주소를 입력해주세요";
+        }
+      }
+    </script>
+  </body>
+</html>
