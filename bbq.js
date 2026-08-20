@@ -2,11 +2,32 @@
 // 이렇게 하면 아직 만들어지지 않은 HTML 요소를 찾는 오류를 방지할 수 있습니다.
 document.addEventListener("DOMContentLoaded", () => {
   /* =========================================================
-     1. 메인 이미지 배너
+     1. 배달/포장 주문 탭
+     ========================================================= */
+
+  const orderTabs = [...document.querySelectorAll(".tab-btn")];
+  const addressInput = document.querySelector(".search-bar input");
+
+  // 클릭한 탭만 선택 상태로 만들고 입력창 안내 문구를 변경합니다.
+  orderTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      orderTabs.forEach((button) => button.classList.remove("active"));
+      tab.classList.add("active");
+
+      addressInput.placeholder = tab.textContent.includes("포장")
+        ? "포장하실 매장명이나 주소를 입력해주세요"
+        : "배달 받으실 주소를 입력해주세요";
+    });
+  });
+
+  /* =========================================================
+     2. 메인 이미지 배너
      ========================================================= */
 
   // HTML에 있는 모든 배너와 배너 조작에 필요한 요소를 가져옵니다.
+
   const slides = [...document.querySelectorAll(".banner-slide")];
+  console.log(slides);
   const dotsWrap = document.querySelector(".banner-dots");
   const currentText = document.querySelector(".banner-current");
   const pauseButton = document.querySelector(".banner-pause");
@@ -94,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
   startAutoPlay();
 
   /* =========================================================
-     2. 신메뉴 페이지 전환
+     3. 신메뉴 페이지 전환
      ========================================================= */
 
   const newMenuCards = [...document.querySelectorAll(".new-menu-card")];
@@ -135,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
   showNewMenuPage(0);
 
   /* =========================================================
-     3. 추천메뉴 페이지 전환
+     4. 추천메뉴 페이지 전환
      ========================================================= */
 
   const recommendCards = [...document.querySelectorAll(".recommend-menu-card")];

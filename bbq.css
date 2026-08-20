@@ -1,3 +1,375 @@
+/* 기본 초기화 및 변수 설정 */
+:root {
+  --primary-red: #e41e26;
+  --text-dark: #111;
+  --text-gray: #777;
+  --bg-color: #f8f9fa;
+  --border-color: #eaeaea;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Pretendard", sans-serif;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* 공통 레이아웃 */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 1. 최상단 앱 유도 배너 */
+.top-banner {
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.top-banner span {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* 2. 메인 헤더 */
+header {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+.logo {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--primary-red);
+  letter-spacing: -2px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 40px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.main-nav li:hover {
+  color: var(--primary-red);
+}
+
+.util-nav {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #555;
+  align-items: center;
+}
+.util-nav .order-btn {
+  background-color: var(--primary-red);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* 3. 배달/포장 주문 및 주소 검색 (히어로 섹션) */
+.hero-section {
+  background-color: #fff;
+  padding: 40px 0 30px;
+  border-bottom: 1px solid var(--border-color);
+}
+.order-box {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.tab-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ccc;
+  border-bottom: 3px solid #eee;
+  transition: 0.3s;
+}
+.tab-btn.active {
+  color: var(--text-dark);
+  border-bottom-color: var(--text-dark);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #f4f4f4;
+  border-radius: 12px;
+  padding: 16px 24px;
+}
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: none;
+  font-size: 18px;
+  outline: none;
+}
+.search-bar input::placeholder {
+  color: #999;
+}
+.search-bar .icon {
+  font-size: 20px;
+  color: var(--primary-red);
+}
+
+/* 4. 메뉴 카테고리 (가로 스크롤 형태) */
+.category-section {
+  background-color: #fff;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.category-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.category-icon {
+  width: 70px;
+  height: 70px;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  transition: 0.3s;
+  border: 1px solid #eee;
+}
+.category-item:hover .category-icon {
+  border-color: var(--primary-red);
+  background-color: #fff0f0;
+  transform: translateY(-5px);
+}
+.category-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 5. 메뉴 섹션 공통 스타일 */
+.menu-section {
+  padding: 60px 0;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+.section-title {
+  font-size: 26px;
+  font-weight: 800;
+}
+.page-indicator {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-gray);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.menu-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+.menu-card:hover {
+  border-color: var(--primary-red);
+  box-shadow: 0 8px 24px rgba(228, 30, 38, 0.1);
+}
+.menu-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  background-color: #eee;
+  background-size: cover;
+  background-position: center;
+}
+.menu-info {
+  flex: 1;
+}
+.menu-badge {
+  display: inline-block;
+  background: var(--primary-red);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.menu-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  word-break: keep-all;
+}
+.menu-price {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* 6. BBQ 서비스 (호버 효과) */
+.service-container {
+  display: flex;
+  gap: 20px;
+}
+.service-card {
+  position: relative;
+  flex: 1;
+  height: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+  z-index: 1;
+}
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.7)
+  );
+  transition: 0.4s ease;
+  z-index: 2;
+}
+.card-content {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 3;
+  color: #fff;
+  transition: transform 0.4s ease;
+}
+.card-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.card-desc {
+  font-size: 16px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.service-card:hover .card-bg {
+  transform: scale(1.08);
+}
+.service-card:hover .card-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 40%,
+    rgba(0, 0, 0, 0.9)
+  );
+}
+.service-card:hover .card-content {
+  transform: translateY(-5px);
+}
+
+/* 7. 푸터 */
+footer {
+  background-color: #222;
+  color: #888;
+  padding: 50px 0;
+  font-size: 14px;
+}
+.footer-nav {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 20px;
+}
+.footer-nav a {
+  font-weight: 600;
+  color: #bbb;
+}
+.footer-nav a.highlight {
+  color: #fff;
+  font-weight: 700;
+}
+.footer-info {
+  line-height: 1.8;
+}
+.footer-info strong {
+  display: block;
+  font-size: 18px;
+  color: #ddd;
+  margin-bottom: 10px;
+}
+.footer-info span {
+  display: inline-block;
+  margin-right: 16px;
+}
+
 /* =========================================================
    1. 메인 이미지 배너의 전체 영역
    ========================================================= */
@@ -297,4 +669,67 @@
 
   /* 지정한 너비와 높이에 맞춰 원본 이미지를 표시합니다. */
   object-fit: fill;
+}
+
+/* =========================================================
+   8. HTML에서 분리한 요소별 스타일
+   인라인 style 속성 대신 의미가 드러나는 클래스를 사용합니다.
+   ========================================================= */
+
+.app-link {
+  text-decoration: underline;
+}
+
+.menu-img--new-crunch {
+  background-image: url("./new 필크런치.png");
+}
+
+.menu-img--double-crunch {
+  background-image: url("./필크런치 더블.png");
+}
+
+.menu-img--triple-pick {
+  background-image: url("./new menu1.png");
+}
+
+.menu-img--sauce-set {
+  background-image: url("./new menu2.png");
+}
+
+.menu-img--golden-olive {
+  background-image: url("./황올.jpg");
+}
+
+.menu-img--half {
+  background-image: url("./반반.jpg");
+}
+
+.menu-img--jamaica-leg {
+  background-image: url("./menu3.png");
+}
+
+.menu-img--jamaica-sotteok {
+  background-image: url("./menu4.png");
+}
+
+.recommendation-section {
+  background-color: #fff;
+  padding-top: 0;
+}
+
+.service-title {
+  margin-bottom: 24px;
+}
+
+.card-bg--coupon {
+  background-image: url("./쿠폰.jpg");
+}
+
+.card-bg--startup {
+  background-image: url("https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80");
+}
+
+.footer-copyright {
+  margin-top: 15px;
+  color: #666;
 }
